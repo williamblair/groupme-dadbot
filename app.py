@@ -35,7 +35,7 @@ def webhook():
     data = request.get_json()
     
     #global isInTimeout
-    print 'Is in timeout: {}'.format(isInTimeout)
+    print 'Is in timeout: ' + isInTimeout
     
     # we don't want to reply to ourselves!
     if data['name'] != 'Dad Bot':
