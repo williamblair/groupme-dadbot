@@ -26,6 +26,9 @@ randomNames = [
     'sonny'
 ]
 
+# whether or not dadbot is disabled
+isInTimeout = False
+
 # called whenever the bot recieves a POST request
 @app.route('/', methods=['POST'])
 def webhook():
@@ -36,53 +39,68 @@ def webhook():
         
         userText = data['text']
         
-        # dad commands perhaps
-        if userText.upper().startswith('DAD '):
-            if userText.split(' ')[1].upper() == 'JOKE':
-                send_dadjoke()
-            elif userText.split(' ')[1].upper() == 'FORTUNE':
-                send_fortune()
+        # timeout feature
+        if userText.upper() == 'SHUT UP DAD':
+            isInTimeout = True
+            send_message('Ok sport... :(')
         
-        # contains i'm
-        elif ' I\'m ' in userText:
-            send_message('Hi, {}, I\'m Dad!'.format(userText.split(' I\'m ')[1]))
-        
-        elif ' I\’m ' in userText:
-            send_message('Hi, {}, I\'m Dad!'.format(userText.split(' I\’m ')[1]))
-        
-        elif ' i\'m ' in userText:
-            send_message('Hi, {}, I\'m Dad!'.format(userText.split(' i\'m ')[1]))
-        
-        elif ' Im ' in userText:
-            send_message('Hi, {}, I\'m Dad!'.format(userText.split(' Im ')[1]))
-        
-        elif ' im ' in userText:
-            send_message('Hi, {}, I\'m Dad!'.format(userText.split(' im ')[1]))
-            
-        # starts with im 
-        elif userText.startswith('I\'m'):
-            send_message('Hi, {}, I\'m Dad!'.format(userText.replace('I\'m', '')))
-            
-        elif userText.startswith('I’m'):
-            send_message('Hi, {}, I\'m Dad!'.format(userText.replace('I’m', '')))
-        
-        elif userText.startswith('i\'m'):
-            send_message('Hi, {}, I\'m Dad!'.format(userText.replace('i\'m', '')))
-        
-        elif userText.startswith('im '):
-            send_message('Hi, {}, I\'m Dad!'.format(userText.replace('im ', '')))
-        
-        elif userText.startswith('Im '):
-            send_message('Hi, {}, I\'m Dad!'.format(userText.replace('Im ', '')))
-        
-        elif userText.startswith('IM '):
-            send_message('Hi, {}, I\'m Dad!'.format(userText.replace('IM ', '')))
-            
-        elif 'HI DAD' in userText.upper():
+        elif userText.upper() == 'COME BACK DAD' or userText.upper() = 'DAD COME BACK':
+            isInTimeout = False
             greetStr = random.choice(randomGreetings)
             nameStr = random.choice(randomNames)
             msg = '{}, {}'.format(greetStr, nameStr)
             send_message(msg)
+        
+        # only do stuff if not in time out
+        if isInTimeout == False:
+        
+            # dad commands perhaps
+            if userText.upper().startswith('DAD '):
+                if userText.split(' ')[1].upper() == 'JOKE':
+                    send_dadjoke()
+                elif userText.split(' ')[1].upper() == 'FORTUNE':
+                    send_fortune()
+            
+            # contains i'm
+            elif ' I\'m ' in userText:
+                send_message('Hi, {}, I\'m Dad!'.format(userText.split(' I\'m ')[1]))
+            
+            elif ' I\’m ' in userText:
+                send_message('Hi, {}, I\'m Dad!'.format(userText.split(' I\’m ')[1]))
+            
+            elif ' i\'m ' in userText:
+                send_message('Hi, {}, I\'m Dad!'.format(userText.split(' i\'m ')[1]))
+            
+            elif ' Im ' in userText:
+                send_message('Hi, {}, I\'m Dad!'.format(userText.split(' Im ')[1]))
+            
+            elif ' im ' in userText:
+                send_message('Hi, {}, I\'m Dad!'.format(userText.split(' im ')[1]))
+                
+            # starts with im 
+            elif userText.startswith('I\'m'):
+                send_message('Hi, {}, I\'m Dad!'.format(userText.replace('I\'m', '')))
+                
+            elif userText.startswith('I’m'):
+                send_message('Hi, {}, I\'m Dad!'.format(userText.replace('I’m', '')))
+            
+            elif userText.startswith('i\'m'):
+                send_message('Hi, {}, I\'m Dad!'.format(userText.replace('i\'m', '')))
+            
+            elif userText.startswith('im '):
+                send_message('Hi, {}, I\'m Dad!'.format(userText.replace('im ', '')))
+            
+            elif userText.startswith('Im '):
+                send_message('Hi, {}, I\'m Dad!'.format(userText.replace('Im ', '')))
+            
+            elif userText.startswith('IM '):
+                send_message('Hi, {}, I\'m Dad!'.format(userText.replace('IM ', '')))
+                
+            elif 'HI DAD' in userText.upper():
+                greetStr = random.choice(randomGreetings)
+                nameStr = random.choice(randomNames)
+                msg = '{}, {}'.format(greetStr, nameStr)
+                send_message(msg)
         
     return "ok", 200
 
