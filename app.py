@@ -42,15 +42,17 @@ def webhook():
         
         userText = data['text']
         
+        global isInTimeout
+        
         # timeout feature
         if userText.upper() == 'SHUT UP DAD':
-            global isInTimeout
+            #global isInTimeout
             isInTimeout = True
             send_message('Ok sport... :(', False)
             return "ok", 200
         
         elif userText.upper() == 'COME BACK DAD' or userText.upper() == 'DAD COME BACK':
-            global isInTimeout
+            #global isInTimeout
             isInTimeout = False
             greetStr = random.choice(randomGreetings)
             nameStr = random.choice(randomNames)
