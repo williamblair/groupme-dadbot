@@ -34,8 +34,8 @@ isInTimeout = False
 def webhook():
     data = request.get_json()
     
-    global isInTimeout
-    print('Is in timeout: ' + str(isInTimeout))
+    #global isInTimeout
+    #print('Is in timeout: ' + str(isInTimeout))
     
     # we don't want to reply to ourselves!
     if data['name'] != 'Dad Bot':
@@ -44,11 +44,13 @@ def webhook():
         
         # timeout feature
         if userText.upper() == 'SHUT UP DAD':
+            global isInTimeout
             isInTimeout = True
             send_message('Ok sport... :(', False)
             return "ok", 200
         
         elif userText.upper() == 'COME BACK DAD' or userText.upper() == 'DAD COME BACK':
+            global isInTimeout
             isInTimeout = False
             greetStr = random.choice(randomGreetings)
             nameStr = random.choice(randomNames)
