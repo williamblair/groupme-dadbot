@@ -26,6 +26,26 @@ randomNames = [
     'sonny'
 ]
 
+winningsonImages = [
+    'winningson0.png',
+    'winningson1.png',
+    'winningson2.jpeg',
+    'winningson3.jpeg',
+    'winningson4.png'
+]
+
+winningsonUrls = [
+  'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fi0.kym-cdn.com%2Fphotos%2Fimages%2Ffacebook%2F001%2F100%2F432%2F0f5.jpg&f=1&nofb=1',
+  'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fi1.kym-cdn.com%2Fphotos%2Fimages%2Fnewsfeed%2F001%2F100%2F438%2F907.jpg&f=1&nofb=1',
+  'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpics.onsizzle.com%2Fare-ya-winning-son-1621129.png&f=1&nofb=1',
+  'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.redd.it%2F4l44szb9p3051.png&f=1&nofb=1',
+  'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.kym-cdn.com%2Fphotos%2Fimages%2Ffacebook%2F001%2F390%2F715%2Ff2c.jpg&f=1&nofb=1',
+  'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.imgur.com%2FKQ03nyV.png&f=1&nofb=1',
+  'https://ruinmyweek.com/wp-content/uploads/2020/05/are-ya-winning-son-memes-12.jpg',
+  'https://ruinmyweek.com/wp-content/uploads/2020/05/are-ya-winning-son-memes-4-1024x601.jpg',
+  'https://cdn.ebaumsworld.com/mediaFiles/picture/2543003/86274102.jpg'
+]
+
 # use a file b/c I think this app.py runs only
 # when a message is recieved, so a global variable
 # won't save anything
@@ -42,8 +62,8 @@ def webhook():
     data = request.get_json()
     
     # we don't want to reply to ourselves!
-    #if data['name'] != 'dad bot tester':
-    if data['name'] != 'Dad Bot':
+    if data['name'] != 'dad bot tester':
+    #if data['name'] != 'Dad Bot':
         
         userText = data['text']
         
@@ -63,8 +83,14 @@ def webhook():
         
         print('Dad environ:', os.path.exists("isTimeout.txt"))
         if not os.path.exists("isTimeout.txt"):
+
+            # Are ya winning, son?
+            if userText.upper().startswith('AM I WINNING DAD') or userText.upper().startswith('AM I WINNING, DAD'):
+                print('Sending winning son!')
+                send_winningson()
+
             # dad commands perhaps
-            if userText.upper().startswith('DAD '):
+            elif userText.upper().startswith('DAD '):
                 if userText.split(' ')[1].upper() == 'JOKE':
                     send_dadjoke()
                 elif userText.split(' ')[1].upper() == 'FORTUNE':
@@ -169,3 +195,17 @@ def send_fortune():
     request = Request(url, urlencode(data).encode())
     json = urlopen(request).read().decode()
 
+def send_winningson():
+    
+    print('In send winningson!')
+    
+    url = 'https://api.groupme.com/v3/bots/post'
+    
+    data = {
+        'bot_id' : os.getenv('GROUPME_BOT_ID'),
+        'text'   : 'Are ya winning, son?\n' + random.choice(winningsonUrls).replace('\\n', ' ').replace('"', '').replace('\\t', '    ').replace('\\', '"'),
+    }
+
+    request = Request(url, urlencode(data).encode())
+    json = urlopen(request).read().decode()
+    
