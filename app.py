@@ -142,7 +142,7 @@ def webhook():
 def send_message(msg):
     url = 'https://api.groupme.com/v3/bots/post'
     
-    testcommand = 'curl -d \\"{\\"text\\" : \\"' + msg + '\\", \\"bot_id\\" : \\"' + os.getenv('GROUPME_BOT_ID') + '\\"}\\" https://api.groupme.com/v3/bots/post'
+    testcommand = 'curl -d "{\\"text\\" : \\"' + msg.replace("'", "\\'") + '\\", \\"bot_id\\" : \\"' + os.getenv('GROUPME_BOT_ID') + '\\"}" https://api.groupme.com/v3/bots/post'
     print('command string: ' + testcommand)
     os.system(testcommand)
 
