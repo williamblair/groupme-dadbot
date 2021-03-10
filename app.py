@@ -142,13 +142,9 @@ def webhook():
 def send_message(msg):
     url = 'https://api.groupme.com/v3/bots/post'
     
-    data = {
-        'bot_id' : os.getenv('GROUPME_BOT_ID'),
-        'text'   : msg,
-    }
-    
-    request = Request(url, urlencode(data).encode())
-    json = urlopen(request).read().decode()
+    testcommand = "curl -d \'{\"text\" : \"" + msg + "\", \"bot_id\" : \"" + os.getenv('GROUPME_BOT_ID') + "\"}\' https://api.groupme.com/v3/bots/post"
+    print('command string: ' + testcommand)
+    os.system(testcommand)
 
 def send_dadjoke():
     headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
@@ -164,13 +160,9 @@ def send_dadjoke():
     
     url = 'https://api.groupme.com/v3/bots/post'
     
-    data = {
-        'bot_id' : os.getenv('GROUPME_BOT_ID'),
-        'text'   : json.replace('\\n', ' ').replace('"', '').replace('\\t', '    ').replace('\\', '"'),
-    }
-    
-    request = Request(url, urlencode(data).encode())
-    json = urlopen(request).read().decode()
+    testcommand = "curl -d \'{\"text\" : \"" + json.replace('\\n', ' ').replace('"', '').replace('\\t', '    ').replace('\\', '"') + "\", \"bot_id\" : \"" + os.getenv('GROUPME_BOT_ID') + "\"}\' https://api.groupme.com/v3/bots/post"
+    print('command string: ' + testcommand)
+    os.system(testcommand)
 
 def send_fortune():
     headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
@@ -187,25 +179,17 @@ def send_fortune():
     
     url = 'https://api.groupme.com/v3/bots/post'
     
-    data = {
-        'bot_id' : os.getenv('GROUPME_BOT_ID'),
-        'text'   : json.replace('\\n', ' ').replace('"', '').replace('\\t', '    ').replace('\\', '"'),
-    }
-
-    request = Request(url, urlencode(data).encode())
-    json = urlopen(request).read().decode()
+    testcommand = "curl -d \'{\"text\" : \"" + json.replace('\\n', ' ').replace('"', '').replace('\\t', '    ').replace('\\', '"') + "\", \"bot_id\" : \"" + os.getenv('GROUPME_BOT_ID') + "\"}\' https://api.groupme.com/v3/bots/post"
+    print('command string: ' + testcommand)
+    os.system(testcommand)
 
 def send_winningson():
     
     print('In send winningson!')
     
     url = 'https://api.groupme.com/v3/bots/post'
-    
-    data = {
-        'bot_id' : os.getenv('GROUPME_BOT_ID'),
-        'text'   : 'Are ya winning, son?\n' + random.choice(winningsonUrls).replace('\\n', ' ').replace('"', '').replace('\\t', '    ').replace('\\', '"'),
-    }
 
-    request = Request(url, urlencode(data).encode())
-    json = urlopen(request).read().decode()
+    testcommand = "curl -d \'{\"text\" : \"" + 'Are ya winning, son?\n' + random.choice(winningsonUrls).replace('\\n', ' ').replace('"', '').replace('\\t', '    ').replace('\\', '"') + "\", \"bot_id\" : \"" + os.getenv('GROUPME_BOT_ID') + "\"}\' https://api.groupme.com/v3/bots/post"
+    print('command string: ' + testcommand)
+    os.system(testcommand)
     
