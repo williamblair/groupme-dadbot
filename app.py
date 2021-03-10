@@ -160,7 +160,7 @@ def send_dadjoke():
     
     url = 'https://api.groupme.com/v3/bots/post'
     
-    testcommand = "curl -d \'{\"text\" : \"" + json.replace('\\n', ' ').replace('"', '').replace('\\t', '    ').replace('\\', '"') + "\", \"bot_id\" : \"" + os.getenv('GROUPME_BOT_ID') + "\"}\' https://api.groupme.com/v3/bots/post"
+    testcommand = 'curl -d "{\\"text\\" : \\"' + json.replace('\\n', ' ').replace('"', '').replace('\\t', '    ').replace('\\', '"') + '\\", \\"bot_id\\" : \\"' + os.getenv('GROUPME_BOT_ID') + '\\"}" https://api.groupme.com/v3/bots/post'
     print('command string: ' + testcommand)
     os.system(testcommand)
 
@@ -179,7 +179,7 @@ def send_fortune():
     
     url = 'https://api.groupme.com/v3/bots/post'
     
-    testcommand = "curl -d \'{\"text\" : \"" + json.replace('\\n', ' ').replace('"', '').replace('\\t', '    ').replace('\\', '"') + "\", \"bot_id\" : \"" + os.getenv('GROUPME_BOT_ID') + "\"}\' https://api.groupme.com/v3/bots/post"
+    testcommand = 'curl -d "{\\"text\\" : \\"' + json.replace('\\n', ' ').replace('"', '').replace('\\t', '    ').replace('\\', '"') + '\\", \\"bot_id\\" : \\"' + os.getenv('GROUPME_BOT_ID') + '\\"}" https://api.groupme.com/v3/bots/post'
     print('command string: ' + testcommand)
     os.system(testcommand)
 
@@ -189,7 +189,7 @@ def send_winningson():
     
     url = 'https://api.groupme.com/v3/bots/post'
 
-    testcommand = "curl -d \'{\"text\" : \"" + 'Are ya winning, son?\n' + random.choice(winningsonUrls).replace('\\n', ' ').replace('"', '').replace('\\t', '    ').replace('\\', '"') + "\", \"bot_id\" : \"" + os.getenv('GROUPME_BOT_ID') + "\"}\' https://api.groupme.com/v3/bots/post"
+    testcommand = 'curl -d "{\\"text\\" : \\"' + 'Are ya winning, son?\n' + random.choice(winningsonUrls).replace('\\n', ' ').replace('"', '').replace('\\t', '    ').replace('\\', '"') + '\\", \\"bot_id\\" : \\"' + os.getenv('GROUPME_BOT_ID') + '\\"}" https://api.groupme.com/v3/bots/post'
     print('command string: ' + testcommand)
     os.system(testcommand)
     
